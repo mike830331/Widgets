@@ -12,20 +12,14 @@ public class WidgetMachine {
             throw new IllegalStateException("Engine must be running before production.");
         }
 
-        int batchSize = engine.getBatchSize();
-        double costPerBatch = engine.getCostPerBatch();
-
-        int totalBatches = (int) Math.ceil((double) quantity / batchSize);
-        double totalCost = totalBatches * costPerBatch;
+        int totalBatches = (int) Math.ceil((double) quantity / engine.getBatchSize());
+        double totalCost = totalBatches * engine.getCostPerBatch();
 
         engine.stop();
         return totalCost;
     }
 
     public void startEngine() {
-        if (engine == null) {
-            throw new IllegalStateException("Engine is not initialized.");
-        }
         engine.start();
     }
 }
